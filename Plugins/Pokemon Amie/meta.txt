@@ -1,0 +1,11 @@
+Name      = Pokemon Amie
+Version   = 1.0.0
+Credits   = Bhagya Jyoti, Pizza Sun, Luka SJ, Domx9200
+
+#------------------------------------------------------
+# This is basically a complete re-write of the Pokemon Amie version from v18 using
+# Luka SJ's Sprite Mask and Easy Mouse System sripts, because why re-invent the wheel.
+# All of the original functionality is still there, but re-written to be easy to maintain
+# And make adding more features to the program easy. I haven't changed the textures
+# from the original v18 version, and don't intend to. I suck at making textures.
+#------------------------------------------------------
