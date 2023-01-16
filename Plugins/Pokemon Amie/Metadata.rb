@@ -105,8 +105,8 @@ module AmieMetaData
   STATUSCHANCE = 0.2
 
   # Represents the crit chance of a move
-  # Note: this is added on top of the normal crit chance, 1 doubles it's chance
-  CRITCHANCE = 1
+  # Note: this number is the multiplier, so 2 doubles it
+  CRITCHANCE = 2
 
   # Represents the extra XP modifier the pokemon will get post battle
   # Note: this is added on top of the normal xp gained, setting this to 1 will double the xp gained
@@ -121,7 +121,7 @@ module AmieMetaData
   # 0.15 at level 4
   # 0.2 at affection total half way from level 4 and 5
   # 0.25 at level 5
-  STURDYCHANCE = [0.1, 0.15, 0.2, 0.25]
+  STURDYCHANCE = [0.1, 0.15, 0.2, 1.0]
 
   @LastChosenPokemon = -1
   @battlePokemon = nil
@@ -149,6 +149,31 @@ module AmieMetaData
 
   def self.stepsTaken()
     return @stepsTaken
+  end
+
+  def self.calcAffectionLevel(affection)
+    return 0 if affection == 0
+    return 5 if affection == AFFECTIONVALUES[1]
+    val = affection / AFFECTIONVALUES[0] + 1
+    if val >= 5
+      return 4
+    end
+    return val
+  end
+
+  def self.calcSturdyChance(affection)
+    ret = 0
+    affectionLevel = calcAffectionLevel(affection)
+    if affectionLevel == 3
+      ret = STURDYCHANCE[0]
+    elsif affectionLevel == 5
+      ret = STURDYCHANCE[3]
+    elsif affectionLevel > 4 and affectionLevel < 4.5
+      ret = STURDYCHANCE[1]
+    else
+      ret = STURDYCHANCE[2]
+    end
+    return ret
   end
 end
 
